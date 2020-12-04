@@ -1,0 +1,10 @@
+# Ignorer l'entièreté des fichiers/dossiers
+*
+# Ne pas ignorer les fichiers suivant
+!/.gitignore
+!/README.md
+!/quoridor.py
+!/main.py
+!/api.py
+!/test.py
+!/quoridorX.py
