@@ -3,6 +3,17 @@
 import copy
 import networkx as nx
 
+"""
+À ajouter à la classe:
+- Stratégie de jeu 
+--------------------------
+La stratégie de jeu sera utilisée lors du mode automatique.
+La stratégie doit vaincre le serveur / joueur 2 à chaque coup
+______________________________________________________________
+Explication de la stratégie utilisée
+
+TODO
+"""
 
 class QuoridorError(Exception):
     pass

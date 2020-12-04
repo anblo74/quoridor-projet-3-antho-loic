@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import requests
 
+"""
+Réutiliser les API écrit lors du projet 1
+"""
 
 URL = "https://python.gel.ulaval.ca/quoridor/api/"
 
