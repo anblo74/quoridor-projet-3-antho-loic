@@ -55,7 +55,7 @@ Lorsque l'argument -a est utilisé dans la CLI, on start le mode automatique.
     Mode automatique: (semblable partie 2)
         Envoyer un POST pour initialiser la partie
         Initialiser un objet de classe Quoridor avec un deep copy
-        Afficher le damier à l'écran
+        Afficher le damier à l'écran en ASCII
         Tant que la partie n'est pas fini:
             Le programme choisi le meilleur move possible
             Transmettre via un PUT au serveur le move du joueur
@@ -79,25 +79,56 @@ Lorsque l'argument -x est utilisé dans la CLI, on active le mode graphique
 
 def analyser_commande():
     # créer un analyseur de ligne de commande
-    parser = argparse.ArgumentParser()
-    """TODO"""
-    # insérer ici les bons appels à la méthode add_argument
-    
+    parser = argparse.ArgumentParser(description= "Jeu Quoridor - phase 3")
+    parser.add_argument('idul', help = 'IDUL du joueur')
+    parser.add_argument('-a', '--automatique', action = 'store_true', help = 'Activer le mode automatique.')
+    parser.add_argument('-x', '--graphique', action = 'store_true', help = 'Activer le mode graphique.')
     return parser.parse_args()
 
 
 if __name__ == "__main__":
-    username = input("Insert name of player: ")
-    ID, partie_initial = initialiser_partie(username)
-    partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
+    ###Analyse les arguments de la CLI
+    #Retourne l'idul du joueur
+    idul = analyser_commande().idul
+    #Retourne True si -a présent, sinon False
+    mode_auto = analyser_commande().automatique
+    #Retourne True si -x présent, sinon False
+    mode_graph = analyser_commande().graphique
+    
+    ###Initialise la partie
+    #Envoyer un POST pour initialer la partie
+    ID, partie_initial = initialiser_partie(idul)
+    ##Initialise l'objet selon la classe demandée
+    #Si le mode graphique est actif, utiliser la classe QuoridorX
+    if mode_graph == True:
+        partie = quoridorX.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
+    #Si le mode graphique est inactif, utiliser la classe Quoridor
+    else:
+        partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
+    #Afficher le damier à l'écran
     print(partie)
 
+    ###Exécuter ce code tant qu'il n'y a pas de gagnant
     while not partie.partie_terminée():
 
-        mvmt_j1 = partie.jouer_coup(1)
-        etat = partie.état_partie()
-        mvmt_j2 = partie.jouer_coup(2)
-        etat = partie.état_partie()
+        ##Le joueur 1 choisi son coup selon le mode spécifié
+        #Si le mode automatique est activé, choisir automatique le coup
+        if mode_auto == True:
+            mvmt_j1 = partie.jouer_coup(1)
+            etat = partie.état_partie()
+        #Si le mode manuel est activé, l'utilisateur choisi le coup à jouer
+        else:
+            #Demander au joueur de spécifier son coup
+            print("Type de coup disponible :\n "
+                "- D : Déplacement\n 
+                "- MH: Mur Horizontal\n 
+                "- MV: Mur Vertical")
+
+            #Détermine si le joueur utilise déplace le pion ou met un mur
+            type_coup = input('Choisissez votre type de coup (D, MH ou MV) :').upper()
+            #Définis la position relative du son coup
+            position = (input('Définissez la position en X de votre coup :'),
+            input('Définissez la position en Y de votre coup :'))
 
         print(partie)
 
