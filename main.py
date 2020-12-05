@@ -1,7 +1,7 @@
 import quoridor
 import quoridorX
 import argparse
-from api import initialiser_partie
+from api import initialiser_partie, jouer_coup
 
 """
 Définir une fonction qui accepte les arguments de la ligne de commande:
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     #Envoyer un POST pour initialer la partie
     ID, partie_initial = initialiser_partie(idul)
 
-    ##Initialise l'objet selon la classe demandée
+    ##Crée l'objet de jeu avec la classe demandée
     #Si le mode graphique est actif, utiliser la classe QuoridorX
     if mode_graph == True:
         partie = quoridorX.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     else:
         partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
 
-    #Afficher le damier à l'écran
+    #Afficher le damier selon la classe
     print(partie)
 
     ###Exécuter ce code tant qu'il n'y a pas de gagnant
@@ -121,7 +121,9 @@ if __name__ == "__main__":
         #Si le mode automatique est activé, choisir automatique le coup
         if mode_auto == True:
             mvmt_j1 = partie.jouer_coup(1)
-            etat = partie.état_partie()
+            #TODO
+            type_coup = 0
+            position = 0
 
         #Si le mode manuel est activé, l'utilisateur choisi le coup à jouer
         else:
@@ -134,10 +136,23 @@ if __name__ == "__main__":
             #Détermine si le joueur utilise déplace le pion ou met un mur
             type_coup = input('Choisissez votre type de coup (D, MH ou MV) :').upper()
 
-            #Définis la position relative du son coup
+            #Définir la position relative de son coup
             position = (input('Définissez la position en X de votre coup :'),
             input('Définissez la position en Y de votre coup :'))
 
+        #Envoyer le coup au serveur via un PUT
+        ID, etat_partie = jouer_coup(ID, type_coup, position)
+
+        ##Update l'objet de jeu avec l'état actuel et la classe demandée
+        #Si le mode graphique est actif, utiliser la classe QuoridorX
+        if mode_graph == True:
+            partie = quoridorX.QuoridorX(etat_partie['joueurs'], etat_partie['murs'])
+
+        #Si le mode graphique est inactif, utiliser la classe Quoridor
+        else:
+            partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
+
+        #Afficher le damier selon la classe
         print(partie)
 
     print(partie.partie_terminée())
