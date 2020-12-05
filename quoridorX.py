@@ -30,8 +30,30 @@ Explication de l'implantation:
 class QuoridorX(Quoridor):
 
     def __str__(self):
-        damier = turtle.Screen()
-        damier.title("Jeu de Quoridor")
-        damier.setup(width=800, height=800)
-        
+        board = turtle.Screen()
+        board.title("Jeu de Quoridor")
+
+        width = 600
+        height = 600
+
+        board_w = int(width * 0.60)
+        board_h = int(height * 0.60)
+
+        origin_x = -board_w/2
+        origin_y = -board_h/2
+        origin = (origin_x, origin_y)
+
+
+        board.setup(width, height)
         tony = turtle.Turtle()
+
+        #Aller à la position de démarrage
+        tony.penup()
+        tony.goto(origin)
+        tony.pendown()
+
+        #Faire le carré jouable
+        tony.goto(origin_x + board_w, origin_y)
+        tony.goto(origin_x + board_w, origin_y + board_h)
+        tony.goto(origin_x, origin_y + board_h)
+        tony.goto(origin)
