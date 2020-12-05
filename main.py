@@ -87,45 +87,53 @@ def analyser_commande():
 
 
 if __name__ == "__main__":
+
     ###Analyse les arguments de la CLI
     #Retourne l'idul du joueur
     idul = analyser_commande().idul
+
     #Retourne True si -a présent, sinon False
     mode_auto = analyser_commande().automatique
+
     #Retourne True si -x présent, sinon False
     mode_graph = analyser_commande().graphique
-    
+
+
     ###Initialise la partie
     #Envoyer un POST pour initialer la partie
     ID, partie_initial = initialiser_partie(idul)
+
     ##Initialise l'objet selon la classe demandée
     #Si le mode graphique est actif, utiliser la classe QuoridorX
     if mode_graph == True:
         partie = quoridorX.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
+
     #Si le mode graphique est inactif, utiliser la classe Quoridor
     else:
         partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
+
     #Afficher le damier à l'écran
     print(partie)
 
     ###Exécuter ce code tant qu'il n'y a pas de gagnant
     while not partie.partie_terminée():
-
         ##Le joueur 1 choisi son coup selon le mode spécifié
         #Si le mode automatique est activé, choisir automatique le coup
         if mode_auto == True:
             mvmt_j1 = partie.jouer_coup(1)
             etat = partie.état_partie()
+
         #Si le mode manuel est activé, l'utilisateur choisi le coup à jouer
         else:
             #Demander au joueur de spécifier son coup
             print("Type de coup disponible :\n "
-                "- D : Déplacement\n 
-                "- MH: Mur Horizontal\n 
+                "- D : Déplacement\n "
+                "- MH: Mur Horizontal\n "
                 "- MV: Mur Vertical")
 
             #Détermine si le joueur utilise déplace le pion ou met un mur
             type_coup = input('Choisissez votre type de coup (D, MH ou MV) :').upper()
+
             #Définis la position relative du son coup
             position = (input('Définissez la position en X de votre coup :'),
             input('Définissez la position en Y de votre coup :'))
