@@ -136,3 +136,14 @@ Il peut aussi contenir d'autres fichiers, par exemple des modules que vous aurie
 Notez bien que la correction étant automatisée, vous avez intérêt à bien suivre les directives de cet énoncé. Si nous sommes obligés d'intervenir manuellement sur vos solutions, vous vous exposez à de fortes pénalités.
 Si vous avez des questions, n'hésitez pas à les poser sur le forum.
 _________________________________________________________________________________________
+Roadmap
+1 - Créer le rep github (done)
+2 - Créer les modules et importer le code réutilisable (done)
+3 - Écrire le plan de développement de chaque module (À améliorer)
+4 - Implanter la logique du jeu dans main.py afin de tester le code futur (WIP)
+5 - Refactorer le code importé (TODO)
+6 - Coder la stratégie du jeu automatique dans la class Quoridor (TODO)
+7 - Coder l'affichage graphique externe de la class QuoridorX (TODO)
+8 - Débuger (TODO)
+9 - Optimiser (TODO)
+10 - Remettre le projet (TODO)
