@@ -102,3 +102,15 @@ class QuoridorX(Quoridor):
             tony.forward(board_w // 10)
         
         tony.goto(origin)
+
+        #Inscrire la position des joueurs sur le damier
+        position_joueur = (self.etat_parti['joueurs'][0]['pos'], self.etat_parti['joueurs'][1]['pos'])
+        #position_joueur = ((5,1),(5,9))
+        for i in range(0, 2):
+            tony.goto(origin_x + board_w //20, origin_y + board_h //40)
+            tony.forward(position_joueur[i][0] * board_w // 10)
+            tony.setheading(90)
+            tony.forward(position_joueur[i][1] * board_h //10)
+            tony.write(str(i+1), align='center', font=('Arial', '15', 'normal'))
+            tony.setheading(0)
+
