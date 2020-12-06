@@ -64,7 +64,7 @@ class QuoridorX(quoridor.Quoridor):
             tony.penup()
             tony.forward(i * board_w // 10)
             tony.setheading(90)
-            otny.pendown()
+            tony.pendown()
             tony.forward(board_h)
             tony.penup()
             tony.goto(origin)
@@ -144,3 +144,5 @@ class QuoridorX(quoridor.Quoridor):
             tony.penup()
 
         tony.goto(origin)
+
+        board.mainloop()
