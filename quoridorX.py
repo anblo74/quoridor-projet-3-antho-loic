@@ -23,7 +23,9 @@ Explication de l'implantation:
         Délimiter les cases
         Ajouter les numéros de case
     Ajouter des éléments selon l'état de la partie
-        TODO
+        Ajouter la position des joueurs
+        Ajouter la position des murs verticaux
+        Ajouter la position des murs horizontaux
 
 """
 
