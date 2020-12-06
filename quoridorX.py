@@ -29,7 +29,10 @@ Explication de l'implantation:
 
 """
 
-class QuoridorX(Quoridor):
+class QuoridorX(quoridor.Quoridor):
+
+    def __init__(self, joueurs, murs=None):
+        super().__init__(self, joueurs, murs)
 
     def __str__(self):
         board = turtle.Screen()
@@ -106,7 +109,7 @@ class QuoridorX(Quoridor):
         tony.goto(origin)
 
         #Inscrire la position des joueurs sur le damier
-        position_joueur = (self.etat_parti['joueurs'][0]['pos'], self.etat_parti['joueurs'][1]['pos'])
+        position_joueur = (self.etat_partie['joueurs'][0]['pos'], self.etat_partie['joueurs'][1]['pos'])
         #position_joueur = ((5,1),(5,9))
         for i in range(0, 2):
             tony.goto(origin_x + board_w //20, origin_y + board_h //40)
@@ -117,7 +120,7 @@ class QuoridorX(Quoridor):
             tony.setheading(0)
 
         #Ajout de la position des murs verticaux
-        position_murs_verticaux = self.etat_parti['murs']['verticaux']
+        position_murs_verticaux = self.etat_partie['murs']['verticaux']
 
         tony.pensize(10)
 
@@ -132,7 +135,7 @@ class QuoridorX(Quoridor):
             tony.penup()
 
         #Ajout position murs horizontaux
-        position_murs_horizontaux = self.etat_parti['murs']['horizontaux']
+        position_murs_horizontaux = self.etat_partie['murs']['horizontaux']
 
         tony.setheading(0)
 
