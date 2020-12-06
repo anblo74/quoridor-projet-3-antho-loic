@@ -114,3 +114,18 @@ class QuoridorX(Quoridor):
             tony.write(str(i+1), align='center', font=('Arial', '15', 'normal'))
             tony.setheading(0)
 
+        #Ajout de la position des murs verticaux
+        position_murs_verticaux = self.etat_parti['murs']['verticaux']
+
+        tony.pensize(10)
+
+        for i in range(len(position_murs_verticaux)):
+            tony.goto(origin)
+            tony.setheading(0)
+            tony.forward(position_murs_verticaux[i][0] * board_w // 10)
+            tony.setheading(90)
+            tony.forward(position_murs_verticaux[i][1] * board_h // 10)
+            tony.pendown()
+            tony.forward(2 * board_h // 10)
+            tony.penup()
+
