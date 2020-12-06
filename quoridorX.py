@@ -129,3 +129,19 @@ class QuoridorX(Quoridor):
             tony.forward(2 * board_h // 10)
             tony.penup()
 
+        #Ajout position murs horizontaux
+        position_murs_horizontaux = self.etat_parti['murs']['horizontaux']
+
+        tony.setheading(0)
+
+        for i in range(len(position_murs_horizontaux)):
+            tony.goto(origin)
+            tony.forward(position_murs_horizontaux[i][0] * board_w // 10)
+            tony.setheading(90)
+            tony.forward(position_murs_horizontaux[i][1] * board_h // 10)
+            tony.setheading(0)
+            tony.pendown()
+            tony.forward(2 * board_w // 10)
+            tony.penup()
+
+        tony.goto(origin)
