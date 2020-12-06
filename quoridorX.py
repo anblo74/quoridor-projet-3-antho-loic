@@ -53,10 +53,10 @@ class QuoridorX(Quoridor):
         tony.pendown()
 
         #Faire le carré jouable
-        tony.goto(origin_x + board_w, origin_y)
+        """ tony.goto(origin_x + board_w, origin_y)
         tony.goto(origin_x + board_w, origin_y + board_h)
         tony.goto(origin_x, origin_y + board_h)
-        tony.goto(origin)
+        tony.goto(origin) """
 
         #Générer une grille pour aider à la programation
         #On a 9 cases de jeu + 1 case avec un nombre
@@ -92,7 +92,7 @@ class QuoridorX(Quoridor):
             tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
             tony.forward(board_h // 10)
             
-        #Ajouter la numérotation des rangs veticaux
+        #Ajouter la numérotation des rangs verticaux
         tony.goto(origin)
         tony.forward(board_h // 40)
         tony.setheading(0)
@@ -100,3 +100,5 @@ class QuoridorX(Quoridor):
         for i in range(1, 10):
             tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
             tony.forward(board_w // 10)
+        
+        tony.goto(origin)
