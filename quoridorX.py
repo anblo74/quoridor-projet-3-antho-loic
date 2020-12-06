@@ -31,9 +31,6 @@ Explication de l'implantation:
 
 class QuoridorX(quoridor.Quoridor):
 
-    def __init__(self, joueurs, murs=None):
-        super().__init__(self, joueurs, murs)
-
     def __str__(self):
         board = turtle.Screen()
         board.title("Jeu de Quoridor")
@@ -48,28 +45,26 @@ class QuoridorX(quoridor.Quoridor):
         origin_y = -board_h/2
         origin = (origin_x, origin_y)
 
-
         board.setup(width, height)
         tony = turtle.Turtle()
+        tony.speed(0)
+        tony.hideturtle()
+
+        tony.pencolor("white")
+        board.bgcolor("black")
 
         #Aller à la position de démarrage
         tony.penup()
         tony.goto(origin)
         tony.pendown()
 
-        #Faire le carré jouable
-        """ tony.goto(origin_x + board_w, origin_y)
-        tony.goto(origin_x + board_w, origin_y + board_h)
-        tony.goto(origin_x, origin_y + board_h)
-        tony.goto(origin) """
-
-        #Générer une grille pour aider à la programation
-        #On a 9 cases de jeu + 1 case avec un nombre
         #Faire une grille de 10 x 10
         #Tracer les lignes verticales
-        for i in range(1, 10):
+        for i in range(1, 11):
+            tony.penup()
             tony.forward(i * board_w // 10)
             tony.setheading(90)
+            otny.pendown()
             tony.forward(board_h)
             tony.penup()
             tony.goto(origin)
@@ -77,9 +72,11 @@ class QuoridorX(quoridor.Quoridor):
             tony.pendown()
 
         #Tracer les lignes horizontales
-        for i in range(1, 10):
+        for i in range(1, 11):
+            tony.penup()
             tony.setheading(90)
             tony.forward(i * board_h // 10)
+            tony.pendown()
             tony.setheading(0)
             tony.forward(board_w)
             tony.penup()
@@ -87,8 +84,6 @@ class QuoridorX(quoridor.Quoridor):
             tony.pendown()
 
         #Ajouter la numérotation des rangs verticaux
-        tony.showturtle()
-        tony.speed(1)
         tony.penup()
         tony.forward(board_w // 20)
         tony.setheading(90)
@@ -110,7 +105,6 @@ class QuoridorX(quoridor.Quoridor):
 
         #Inscrire la position des joueurs sur le damier
         position_joueur = (self.etat_partie['joueurs'][0]['pos'], self.etat_partie['joueurs'][1]['pos'])
-        #position_joueur = ((5,1),(5,9))
         for i in range(0, 2):
             tony.goto(origin_x + board_w //20, origin_y + board_h //40)
             tony.forward(position_joueur[i][0] * board_w // 10)
