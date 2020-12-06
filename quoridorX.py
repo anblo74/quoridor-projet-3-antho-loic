@@ -57,3 +57,46 @@ class QuoridorX(Quoridor):
         tony.goto(origin_x + board_w, origin_y + board_h)
         tony.goto(origin_x, origin_y + board_h)
         tony.goto(origin)
+
+        #Générer une grille pour aider à la programation
+        #On a 9 cases de jeu + 1 case avec un nombre
+        #Faire une grille de 10 x 10
+        #Tracer les lignes verticales
+        for i in range(1, 10):
+            tony.forward(i * board_w // 10)
+            tony.setheading(90)
+            tony.forward(board_h)
+            tony.penup()
+            tony.goto(origin)
+            tony.setheading(0)
+            tony.pendown()
+
+        #Tracer les lignes horizontales
+        for i in range(1, 10):
+            tony.setheading(90)
+            tony.forward(i * board_h // 10)
+            tony.setheading(0)
+            tony.forward(board_w)
+            tony.penup()
+            tony.goto(origin)
+            tony.pendown()
+
+        #Ajouter la numérotation des rangs verticaux
+        tony.showturtle()
+        tony.speed(1)
+        tony.penup()
+        tony.forward(board_w // 20)
+        tony.setheading(90)
+        tony.forward(board_h // 40 + board_h //10)
+        for i in range(1, 10):
+            tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
+            tony.forward(board_h // 10)
+            
+        #Ajouter la numérotation des rangs veticaux
+        tony.goto(origin)
+        tony.forward(board_h // 40)
+        tony.setheading(0)
+        tony.forward(board_w // 20 + board_w //10)
+        for i in range(1, 10):
+            tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
+            tony.forward(board_w // 10)
