@@ -140,6 +140,9 @@ if __name__ == "__main__":
             position = (input('Définissez la position en X de votre coup :'),
             input('Définissez la position en Y de votre coup :'))
 
+        #Selon le critère 3.6 : Afficher le damier à chaque coup
+        print(partie)
+
         #Envoyer le coup au serveur via un PUT
         ID, etat_partie = jouer_coup(ID, type_coup, position)
 
