@@ -133,7 +133,7 @@ class Quoridor:
         if l1 > l2:
             s2 += l1 - l2
 
-        #constructeur pour le haut de page (la legende pissa)
+        #constructeur pour le haut de page (la legende)
         haut_page = "Légende:"
         haut_page += '\n' +  f'   1={nom_1},' + s1 * ' ' + 'murs=' + nbr_mur1 * '|'
         haut_page += '\n' +  f'   2={nom_2},' + s2 * ' ' + 'murs=' + nbr_mur2 * '|'
