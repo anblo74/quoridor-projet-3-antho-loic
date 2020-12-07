@@ -26,6 +26,12 @@ Explication de l'implantation:
         Ajouter la position des joueurs
         Ajouter la position des murs verticaux
         Ajouter la position des murs horizontaux
+        
+À changer:
+Mettre la génération du damier de base dans le constructeur de QuoridorX
+Garder la même fenêtre ouverte lors de l'exécution
+Marquer les positions avec un carré de couleur et l'indiquer dans la légende
+Se rappeler des derniers carrés et les effacer lors de l'update de la position
 
 """
 

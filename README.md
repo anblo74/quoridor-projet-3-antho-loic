@@ -143,7 +143,7 @@ Roadmap
 4 - Implanter la logique du jeu dans main.py afin de tester le code futur (WIP)
 5 - Refactorer le code importé (done)
 6 - Coder la stratégie du jeu automatique dans la class Quoridor (TODO)
-7 - Coder l'affichage graphique externe de la class QuoridorX (WIP)
+7 - Coder l'affichage graphique externe de la class QuoridorX (WIP)(Revoir critères de l'énoncé)
 8 - Débuger (TODO)
 9 - Optimiser (TODO)
 10 - Remettre le projet (TODO)

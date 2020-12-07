@@ -10,7 +10,14 @@ import networkx as nx
 La stratégie de jeu sera utilisée lors du mode automatique.
 La stratégie doit vaincre le serveur / joueur 2 à chaque coup
 ______________________________________________________________
-Explication de la stratégie utilisée
+Explication de la stratégie semi-wize utilisée
+Générer un graphe de l'état actuel du jeu
+Générer le trajet le plus court pour le joueur 1 et 2
+Si le joueur 1 a un trajet plus court:
+    Déplacer le joueur 1 sur le trajet le plus rapide
+Sinon on va poser un mur pour ralentir le joueur 2:
+    Déterminer si le déplacement le plus rapide de l'adversaire est horizontal ou vertical
+    Poser un mur sur le sens approprié pour bloquer l'adversaire
 
 TODO
 """
