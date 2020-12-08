@@ -153,6 +153,8 @@ if __name__ == "__main__":
 
         #Si le mode graphique est inactif, utiliser la classe Quoridor
         else:
+            print("etat_partie joueurs" + str(etat_partie['joueurs']))
+            print("etat_partie murs" + str(etat_partie['murs']))
             partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
 
         #Afficher le damier selon la classe

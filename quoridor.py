@@ -95,7 +95,7 @@ class Quoridor:
             for i in range (len(murs['horizontaux'])):
                 #Pour les murs horizontaux, itérer sur chaque position de mur placé
                 if not isinstance(murs['horizontaux'][i], (tuple, list)) \
-                or len(murs['horizontaux']) != 2:
+                or len(murs['horizontaux'][i]) != 2:
                     #Si les murs horizontaux ne sont pas des tuples ou list ou
                     # qui ne sont pas des pairs
                     raise QuoridorError("La position d'un mur est invalide.")
@@ -103,7 +103,7 @@ class Quoridor:
             for i in range (len(murs['verticaux'])):
                 #Pour les murs verticaux, itérer sur chaque position de mur placé
                 if not isinstance(murs['verticaux'][i], (tuple, list)) or \
-                    len(murs['verticaux']) != 2:
+                    len(murs['verticaux'][i]) != 2:
                     #Si les murs verticaux ne sont pas des tuples ou
                     # list ou qui ne sont pas des pairs
                     raise QuoridorError("La position d'un mur est invalide.")

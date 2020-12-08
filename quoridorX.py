@@ -37,7 +37,7 @@ Se rappeler des derniers carrés et les effacer lors de l'update de la position
 
 class QuoridorX(quoridor.Quoridor):
 
-    def __str__(self):
+    def afficher(self):
         board = turtle.Screen()
         board.title("Jeu de Quoridor")
 
