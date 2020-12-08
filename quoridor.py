@@ -171,6 +171,8 @@ class Quoridor:
                 damier[-2*y][4*x-1+k] = '-'
 
         #Murs verticaux
+        print("Murs")
+        print(self.murs)
         for pos in grille['murs']['verticaux']:
             x, y = pos
             for k in range(3):
@@ -197,7 +199,7 @@ class Quoridor:
         if position[0] > 9 or position[1] > 9 or position[0] < 1 or position[1] < 1:
             raise QuoridorError('La position est invalide (en dehors du damier)')
 
-        for i in list(self.graphe.successors(self.current_position)):
+        for i in list(self.graphe.successors(self.current_position_j1)):
 
             if i == position:
                 return
@@ -256,20 +258,6 @@ class Quoridor:
             etat_partie['joueurs'][1] = {"nom": self.joueurs[1], "murs": 10, "pos": (5, 9)}
             #Ajouter position initiale joueur 2
 
-        """
-        Est ce que les blocs suivants sont vraiment requis?
-        Ex: Si est rendu ici dans le code, on peut considérer que les exceptions
-        sont tous gérée. Donc si joueur 1 est un dict, on sait que joueur 2 l'est aussi.
-        
-        De plus, possible de remplacer le elif plus haut en else? Pcq si pas un dict, c'est un str
-        
-        #if type(self.joueurs[1]) == dict:
-        #    self.etat['joueurs'] += self.joueurs[1]
-
-        #elif type(self.joueurs[1]) == str:
-        #    self.etat['joueurs'] += {"nom": self.joueurs[0], "murs": 10, "pos": (5, 1)}
-        """
-
         return etat_partie
 
     def jouer_coup(self, joueur):
@@ -310,18 +298,34 @@ class Quoridor:
         if self.partie_terminée() != False:
             raise QuoridorError("La partie est déjà terminée.")
 
+        #Générer un graphe
         self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
         self.murs['horizontaux'], self.murs['verticaux'])
 
-        self.current_position = tuple(self.etat_partie['joueurs'][joueur - 1]['pos'])
+        #Génère la position actuelle des joueurs
+        self.current_position_j1 = tuple(self.etat_partie['joueurs'][0]['pos'])
+        self.current_position_j2 = tuple(self.etat_partie['joueurs'][1]['pos'])
 
-        next_move = nx.shortest_path(self.graphe, self.current_position, f"B{joueur}")[1]
-        # next_move est une position (x,y) ou le joueur doit bouger
-        self.déplacer_jeton(joueur, next_move)
-        self.joueurs[joueur - 1]['pos'] = next_move
+        #Donne le trajet le plus rapide des joueurs
+        short_path_j1 = nx.shortest_path(self.graphe, self.current_position_j1, "B1")
+        short_path_j2 = nx.shortest_path(self.graphe, self.current_position_j2, "B2")
 
-        return ('D', next_move)
-
+        #Si le joueur 1 est plus prêt de son objectif
+        if len(short_path_j1) <= len(short_path_j2):
+            next_move = short_path_j1[1]
+            self.déplacer_jeton(joueur, next_move)
+            return("D", next_move)
+        else:
+            #Déterminer s'il faut un mur vertical ou horizontal
+            if (short_path_j2[0][0] - short_path_j2[1][0]) == 0:
+                #Si le déplacement est dans l'axe des y, mettre un mur horizontal
+                next_move = short_path_j2[1]
+                self.placer_mur(joueur, next_move, "horizontal")
+                return("MH", next_move)
+            else:
+                next_move = short_path_j2[1]
+                self.placer_mur(joueur, next_move, "vertical")
+                return("MV", next_move)
 
 
     def partie_terminée(self):
@@ -376,25 +380,13 @@ class Quoridor:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
         if orientation == 'vertical':
-            self.etat_partie['murs']["verticaux"] += position
-        if orientation == 'horizontal':
-            self.etat_partie['murs']["horizontaux"] += position
-        if not (nx.has_path(self.graphe, self.etat_partie['joueurs'][0]['pos'], 'B1') \
-        and nx.has_path(self.graphe, self.etat_partie['joueurs'][1]['pos'], 'B2')):
-            raise QuoridorError("La position est invalide pour cette orientation")
+            self.etat_partie['murs']["verticaux"].append(position)
 
-        """
-        2e approche pour verifier si un mur occupe deja cette position (code incomplet):
-        v_interdit = []
-        h_interdit = []
-            for i in self.etat_partie['murs']['horizontaux']:
-                h_interdit =+ i
-                h_interdit =+ ((i[0] - 1), i[1])
-                h_interdit =+ ((i[0] + 1), i[1])
-                v_interdit =+ (i[0] + 1, i[1] - 1)
-            for i in self.etat_partie['murs']['verticaux']
-        if orientation == 'vertical':
-        if orientation == 'horizontal': """
+        if orientation == 'horizontal':
+            self.etat_partie['murs']["horizontaux"].append(position)
+
+        if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
+            raise QuoridorError("La position est invalide pour cette orientation")
 
 
 def construire_graphe(joueurs, murs_horizontaux, murs_verticaux):

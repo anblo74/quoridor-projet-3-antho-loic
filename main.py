@@ -120,10 +120,7 @@ if __name__ == "__main__":
         ##Le joueur 1 choisi son coup selon le mode spécifié
         #Si le mode automatique est activé, choisir automatique le coup
         if mode_auto == True:
-            mvmt_j1 = partie.jouer_coup(1)
-            #TODO
-            type_coup = 0
-            position = 0
+            (type_coup, position) = partie.jouer_coup(1)
 
         #Si le mode manuel est activé, l'utilisateur choisi le coup à jouer
         else:
