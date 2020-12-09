@@ -320,12 +320,24 @@ class Quoridor:
             if (short_path_j2[0][0] - short_path_j2[1][0]) == 0:
                 #Si le déplacement est dans l'axe des y, mettre un mur horizontal
                 next_move = short_path_j2[1]
-                self.placer_mur(joueur, next_move, "horizontal")
-                return("MH", next_move)
+                print("Mur horizontal")
+                print(next_move)
+                try:
+                    self.placer_mur(joueur, next_move, "horizontal")
+                    return("MH", next_move)
+                except QuoridorError:
+                    self.déplacer_jeton(joueur, short_path_j1[1])
+                    return ("D", short_path_j1[1])
             else:
                 next_move = short_path_j2[1]
-                self.placer_mur(joueur, next_move, "vertical")
-                return("MV", next_move)
+                print("Mur vertical")
+                print(next_move)
+                try:
+                    self.placer_mur(joueur, next_move, "vertical")
+                    return("MV", next_move)
+                except QuoridorError:
+                    self.déplacer_jeton(joueur, short_path_j1[1])
+                    return ("D", short_path_j1[1])
 
 
     def partie_terminée(self):
