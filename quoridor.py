@@ -71,7 +71,27 @@ class Quoridor:
         if murs is not None and type(murs) is not dict:
             #Si murs est présent et qu'il n'est pas de type dict
             raise QuoridorError("L'argument 'murs' n'est pas un dictionnaire lorsque présent.")
+        
+        if type(murs) == dict:  #Si murs contient un dictionnaire
+            for i in range (len(murs['horizontaux'])):
+                #Pour les murs horizontaux, itérer sur chaque position de mur placé
+                if not isinstance(murs['horizontaux'][i], (tuple, list)) \
+                or len(murs['horizontaux'][i]) != 2:
+                    #Si les murs horizontaux ne sont pas des tuples ou list ou
+                    # qui ne sont pas des pairs
+                    raise QuoridorError("La position d'un mur est invalide.")
 
+            for i in range (len(murs['verticaux'])):
+                #Pour les murs verticaux, itérer sur chaque position de mur placé
+                if not isinstance(murs['verticaux'][i], (tuple, list)) or \
+                    len(murs['verticaux'][i]) != 2:
+                    #Si les murs verticaux ne sont pas des tuples ou
+                    # list ou qui ne sont pas des pairs
+                    raise QuoridorError("La position d'un mur est invalide.")
+
+        if murs is None:
+            murs = {'horizontaux': [], 'verticaux': []}
+        
         if len(murs['horizontaux']) + len(murs['verticaux']) + \
         joueurs[0]["murs"] + joueurs[1]["murs"] != 20:
             #La somme des nbr murs déjà placé et murs restant à jouer = 20
@@ -91,22 +111,6 @@ class Quoridor:
 
 
 
-        if type(murs) == dict:  #Si murs contient un dictionnaire
-            for i in range (len(murs['horizontaux'])):
-                #Pour les murs horizontaux, itérer sur chaque position de mur placé
-                if not isinstance(murs['horizontaux'][i], (tuple, list)) \
-                or len(murs['horizontaux'][i]) != 2:
-                    #Si les murs horizontaux ne sont pas des tuples ou list ou
-                    # qui ne sont pas des pairs
-                    raise QuoridorError("La position d'un mur est invalide.")
-
-            for i in range (len(murs['verticaux'])):
-                #Pour les murs verticaux, itérer sur chaque position de mur placé
-                if not isinstance(murs['verticaux'][i], (tuple, list)) or \
-                    len(murs['verticaux'][i]) != 2:
-                    #Si les murs verticaux ne sont pas des tuples ou
-                    # list ou qui ne sont pas des pairs
-                    raise QuoridorError("La position d'un mur est invalide.")
 
 
         self.joueurs = copy.deepcopy(joueurs)
