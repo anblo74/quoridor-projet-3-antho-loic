@@ -375,24 +375,36 @@ class Quoridor:
         or (orientation == 'vertical' and position[0] == 1):
             raise QuoridorError('La position est invalide pour cette orientation')
 
-        if orientation == 'horizontal':  # ce qu'il faut verifier avant de placer un mur horizontal
+        if orientation == 'horizontal':
+            #Vérifie sur chaque mur horizontal existant
             for i in self.etat_partie['murs']['horizontaux']:
+                #S'ils ont le même y
                 if i[1] == position[1]:
+                    #S'il sont à 1x près
                     if i[0] == position[0] or i[0] == position[0] -1 or i[0] == position[0] + 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
+            #Vérifie sur chaque mur vertical existant
             for i in self.etat_partie['murs']['verticaux']:
-                if i[0] == position[0]:
-                    if i[1] == position[1] -1:
+                #S'il y a un mur à sa droite
+                if i[0] == position[0] + 1:
+                    #Si le mur en dessous et lecoupe
+                    if i[1] == position[1] + 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
-        if orientation == 'vertical':  # ce qu'il faut verifier avant de placer un mur vertical
+        if orientation == 'vertical':
+            #Vérifie sur chaque mur vertical existant
             for i in self.etat_partie['murs']['verticaux']:
+                #S'ils ont le même x
                 if i[0] == position[0]:
+                    #S'il sont à 1y près
                     if i[1] == position[1] or i[1] == position[1] +1 or i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
+            #Vérifie sur chaque mur horizontal existant
             for i in self.etat_partie['murs']['horizontaux']:
-                if i[0] == position[0]:
-                    if i[1] == position[1] +1:
+                #S'il y a un mur à sa gauche
+                if i[0] == position[0] + 1:
+                    #Si le mur est au dessus et le coupe
+                    if i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
         if orientation == 'vertical':
