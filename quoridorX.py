@@ -38,6 +38,10 @@ Ajouter une fenêtre en mode manuel graphique pour inscrire les positions
 
 class QuoridorX(quoridor.Quoridor):
 
+    def __init__(self, joueurs, murs):
+        quoridor.Quoridor.__init__(self, joueurs, murs=None)
+        self.afficher()
+
     def afficher(self):
         board = turtle.Screen()
         board.title("Jeu de Quoridor")
@@ -81,7 +85,6 @@ class QuoridorX(quoridor.Quoridor):
         #Tracer les lignes horizontales
         for i in range(1, 11):
             tony.penup()
-            tony.setheading(90)
             tony.forward(i * board_h // 10)
             tony.pendown()
             tony.setheading(0)
