@@ -118,7 +118,11 @@ if __name__ == "__main__":
     """
 
     #Afficher le damier selon la classe
-    print(partie)
+    if mode_graph == True:
+        print("Premier affichage après init")
+        partie.afficher()
+    else:
+        print(partie)
 
     ###Exécuter ce code tant qu'il n'y a pas de gagnant
     while not partie.partie_terminée():
@@ -143,7 +147,11 @@ if __name__ == "__main__":
             input('Définissez la position en Y de votre coup :'))
 
         #Selon le critère 3.6 : Afficher le damier à chaque coup
-        print(partie)
+        if mode_graph == True:
+            partie.afficher()
+            print("Deuxième affichage après init")
+        else:
+            print(partie)
 
         #Envoyer le coup au serveur via un PUT
         ID, etat_partie = jouer_coup(ID, type_coup, position)
@@ -160,6 +168,9 @@ if __name__ == "__main__":
             partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
 
         #Afficher le damier selon la classe
-        print(partie)
+        if mode_graph == True:
+            partie.afficher()
+        else:
+            print(partie)
 
     print(partie.partie_terminée())
