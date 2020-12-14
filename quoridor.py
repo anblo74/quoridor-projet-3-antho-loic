@@ -92,6 +92,12 @@ class Quoridor:
         if murs is None:
             murs = {'horizontaux': [], 'verticaux': []}
         
+        if type(joueurs[0]) == str:  #Si la partie vient de start
+            joueurs[0] = {"nom": joueurs[0], "murs": 10, "pos": (5, 1)}
+            #Ajouter position initiale joueur 1
+            joueurs[1] = {"nom": joueurs[1], "murs": 10, "pos": (5, 9)}
+            #Ajouter position initiale joueur 2
+        
         if len(murs['horizontaux']) + len(murs['verticaux']) + \
         joueurs[0]["murs"] + joueurs[1]["murs"] != 20:
             #La somme des nbr murs déjà placé et murs restant à jouer = 20
@@ -108,10 +114,6 @@ class Quoridor:
                 #Si la valeur de 'pos' n'est pas un (tuple OU list) ou
                 # que la valeur de 'pos' n'a pas 2 valeurs
                 raise QuoridorError("La position d'un joueur est invalide.")
-
-
-
-
 
         self.joueurs = copy.deepcopy(joueurs)
         self.murs = copy.deepcopy(murs)
