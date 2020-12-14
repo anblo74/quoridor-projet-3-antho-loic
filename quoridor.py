@@ -375,6 +375,15 @@ class Quoridor:
             position (Tuple[int, int]): le tuple (x, y) de la position du mur.
             orientation (str): l'orientation du mur ('horizontal' ou 'vertical').
         """
+
+        #Générer la position actuelle des joueurs
+        self.current_position_j1 = tuple(self.etat_partie['joueurs'][0]['pos'])
+        self.current_position_j2 = tuple(self.etat_partie['joueurs'][1]['pos'])
+
+        #Générer un graphe
+        self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
+        self.murs['horizontaux'], self.murs['verticaux'])
+
         if joueur != 1 and joueur != 2:
             raise QuoridorError('Le numéro du joueur est autre que 1 ou 2.')
         if self.etat_partie['joueurs'][joueur - 1]['murs'] == 0:
