@@ -199,6 +199,10 @@ class Quoridor:
             du jeton (1<=x<=9 et 1<=y<=9).
         """
 
+        #Générer un graphe
+        self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
+        self.murs['horizontaux'], self.murs['verticaux'])
+
         if joueur != 1 and joueur != 2:
             raise QuoridorError('Le numéro du joueur est autre que 1 ou 2.')
 
