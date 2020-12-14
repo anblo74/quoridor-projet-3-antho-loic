@@ -376,45 +376,73 @@ class Quoridor:
             raise QuoridorError('La position est invalide pour cette orientation')
 
         if orientation == 'horizontal':
+
             #Vérifie sur chaque mur horizontal existant
             for i in self.etat_partie['murs']['horizontaux']:
+
                 #S'ils ont le même y
                 if i[1] == position[1]:
+
                     #S'il sont à 1x près
                     if i[0] == position[0] or i[0] == position[0] -1 or i[0] == position[0] + 1:
+
                         raise QuoridorError('Un mur occupe déjà cette position')
+
             #Vérifie sur chaque mur vertical existant
             for i in self.etat_partie['murs']['verticaux']:
+
                 #S'il y a un mur à sa droite
                 if i[0] == position[0] + 1:
-                    #Si le mur en dessous et lecoupe
+
+                    #Si le mur en dessous et le coupe
                     if i[1] == position[1] + 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
+            #On ajoute le mur au dictionnaire horizontal
+            self.etat_partie['murs']["horizontal"].append(position)
+
+            #On regénère le graphe
+            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
+            self.murs['horizontaux'], self.murs['verticaux'])
+            
+            #On vérifie s'il y a toujours un chemin possible pour les joueurs
+            if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
+                self.etat_partie['murs ']["horizontal"].remove(position)
+                raise QuoridorError("La position est invalide pour cette orientation")
+
         if orientation == 'vertical':
+
             #Vérifie sur chaque mur vertical existant
             for i in self.etat_partie['murs']['verticaux']:
+
                 #S'ils ont le même x
                 if i[0] == position[0]:
+
                     #S'il sont à 1y près
                     if i[1] == position[1] or i[1] == position[1] +1 or i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
+
             #Vérifie sur chaque mur horizontal existant
             for i in self.etat_partie['murs']['horizontaux']:
+
                 #S'il y a un mur à sa gauche
                 if i[0] == position[0] + 1:
+
                     #Si le mur est au dessus et le coupe
                     if i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
-        if orientation == 'vertical':
+            #on ajoute le mur au dictionnaire vertical
             self.etat_partie['murs']["verticaux"].append(position)
 
-        if orientation == 'horizontal':
-            self.etat_partie['murs']["horizontaux"].append(position)
-
-        if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
-            raise QuoridorError("La position est invalide pour cette orientation")
+            #On regénère le graphe
+            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
+            self.murs['horizontaux'], self.murs['verticaux'])
+            
+            #On vérifie s'il y a toujours un chemin possible pour les joueurs
+            if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
+                self.etat_partie['murs ']["vertical"].remove(position)
+                raise QuoridorError("La position est invalide pour cette orientation")
 
 
 def construire_graphe(joueurs, murs_horizontaux, murs_verticaux):
