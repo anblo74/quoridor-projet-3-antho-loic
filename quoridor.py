@@ -432,7 +432,7 @@ class Quoridor:
             for i in self.etat_partie['murs']['horizontaux']:
 
                 #S'il y a un mur à sa gauche
-                if i[0] == position[0] + 1:
+                if i[0] == position[0] - 1:
 
                     #Si le mur est au dessus et le coupe
                     if i[1] == position[1] - 1:
