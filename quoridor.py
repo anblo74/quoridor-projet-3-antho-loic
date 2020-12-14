@@ -435,7 +435,7 @@ class Quoridor:
                 if i[0] == position[0] - 1:
 
                     #Si le mur est au dessus et le coupe
-                    if i[1] == position[1] - 1:
+                    if i[1] == position[1] + 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
             #on ajoute le mur au dictionnaire vertical
