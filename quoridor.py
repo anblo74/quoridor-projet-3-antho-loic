@@ -375,6 +375,10 @@ class Quoridor:
 
         if orientation == 'horizontal':
 
+            #Vérifier si le mur est valide
+            if position[0] not in range(1, 9) or position[1] not in range(1, 10):
+                raise QuoridorError("Le mur est hors jeu")
+
             #Vérifie sur chaque mur horizontal existant
             for i in self.etat_partie['murs']['horizontaux']:
 
@@ -410,6 +414,10 @@ class Quoridor:
 
         if orientation == 'vertical':
 
+            #Vérifier si le mur est valide
+            if position[0] not in range(1, 10) or position[1] not in range(1, 9):
+                raise QuoridorError("Le mur est hors jeu")
+
             #Vérifie sur chaque mur vertical existant
             for i in self.etat_partie['murs']['verticaux']:
 
@@ -434,8 +442,12 @@ class Quoridor:
             self.etat_partie['murs']["verticaux"].append(position)
 
             #On regénère le graphe
-            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
-            self.murs['horizontaux'], self.murs['verticaux'])
+            print(self.joueurs[0]['pos'])
+            print(self.joueurs[1]['pos'])
+            print(self.murs['horizontaux'])
+            print(self.murs['verticaux'])
+            
+            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], self.murs['horizontaux'], self.murs['verticaux'])
             
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
