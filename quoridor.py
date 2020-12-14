@@ -386,18 +386,18 @@ class Quoridor:
 
                         raise QuoridorError('Un mur occupe déjà cette position')
 
-            #Vérifie sur chaque mur vertical existant
+            #Vérifie sur chaque mur vertical existant si on croise
             for i in self.etat_partie['murs']['verticaux']:
 
                 #S'il y a un mur à sa droite
                 if i[0] == position[0] + 1:
 
                     #Si le mur en dessous et le coupe
-                    if i[1] == position[1] + 1:
+                    if i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
-            #On ajoute le mur au dictionnaire horizontal
-            self.etat_partie['murs']["horizontal"].append(position)
+            #On ajoute le mur au dictionnaire horizontaux
+            self.etat_partie['murs']["horizontaux"].append(position)
 
             #On regénère le graphe
             self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
