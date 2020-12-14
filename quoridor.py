@@ -324,8 +324,7 @@ class Quoridor:
             if (short_path_j2[0][0] - short_path_j2[1][0]) == 0:
                 #Si le déplacement est dans l'axe des y, mettre un mur horizontal
                 next_move = short_path_j2[1]
-                print("Mur horizontal")
-                print(next_move)
+
                 try:
                     self.placer_mur(joueur, next_move, "horizontal")
                     return("MH", next_move)
@@ -334,8 +333,7 @@ class Quoridor:
                     return ("D", short_path_j1[1])
             else:
                 next_move = short_path_j2[1]
-                print("Mur vertical")
-                print(next_move)
+
                 try:
                     self.placer_mur(joueur, next_move, "vertical")
                     return("MV", next_move)
@@ -407,7 +405,7 @@ class Quoridor:
             
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
-                self.etat_partie['murs ']["horizontal"].remove(position)
+                del self.murs['horizontaux'][-1]
                 raise QuoridorError("La position est invalide pour cette orientation")
 
         if orientation == 'vertical':
@@ -441,7 +439,7 @@ class Quoridor:
             
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
-                self.etat_partie['murs ']["vertical"].remove(position)
+                del self.murs['verticaux'][-1]
                 raise QuoridorError("La position est invalide pour cette orientation")
 
 
