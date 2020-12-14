@@ -199,6 +199,10 @@ class Quoridor:
             du jeton (1<=x<=9 et 1<=y<=9).
         """
 
+        #Générer la position actuelle des joueurs
+        self.current_position_j1 = tuple(self.etat_partie['joueurs'][0]['pos'])
+        self.current_position_j2 = tuple(self.etat_partie['joueurs'][1]['pos'])
+
         #Générer un graphe
         self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
         self.murs['horizontaux'], self.murs['verticaux'])
