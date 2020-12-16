@@ -119,7 +119,6 @@ if __name__ == "__main__":
 
     #Afficher le damier selon la classe
     if mode_graph == True:
-        print("Premier affichage après init")
         partie.afficher()
     else:
         print(partie)
@@ -149,7 +148,6 @@ if __name__ == "__main__":
         #Selon le critère 3.6 : Afficher le damier à chaque coup
         if mode_graph == True:
             partie.afficher()
-            print("Deuxième affichage après init")
         else:
             print(partie)
 
@@ -163,8 +161,7 @@ if __name__ == "__main__":
 
         #Si le mode graphique est inactif, utiliser la classe Quoridor
         else:
-            print("etat_partie joueurs" + str(etat_partie['joueurs']))
-            print("etat_partie murs" + str(etat_partie['murs']))
+
             partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
 
         #Afficher le damier selon la classe
@@ -172,5 +169,11 @@ if __name__ == "__main__":
             partie.afficher()
         else:
             print(partie)
-
+            
+    if mode_graph == True:
+                partie.afficher()
+                print("Deuxième affichage après init")
+    else:
+        print(partie)
+    print("allo")
     print(partie.partie_terminée())
