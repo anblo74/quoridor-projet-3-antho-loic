@@ -391,7 +391,7 @@ class Quoridor:
                     if i[1] == position[1] or i[1] == position[1] +1 or i[1] == position[1] - 1:
                         raise QuoridorError('Un mur occupe déjà cette position')
             for i in self.etat_partie['murs']['horizontaux']:
-                if i[0] == position[0] + 1: #avec le +1 le probleme des croisement devrait disparaitre
+                if i[0] == position[0]:
                     if i[1] == position[1] +1:
                         raise QuoridorError('Un mur occupe déjà cette position')
 
@@ -401,8 +401,7 @@ class Quoridor:
         if orientation == 'horizontal':
             self.etat_partie['murs']["horizontaux"].append(position)
 
-        if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') \
-        and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
+        if not (nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][0]['pos']), 'B1') and nx.has_path(self.graphe, tuple(self.etat_partie['joueurs'][1]['pos']), 'B2')):
             raise QuoridorError("La position est invalide pour cette orientation")
 
 

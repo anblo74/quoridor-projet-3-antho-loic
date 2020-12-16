@@ -111,11 +111,11 @@ if __name__ == "__main__":
     #Si le mode graphique est inactif, utiliser la classe Quoridor
     
     else:
-        partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
-    """else:
         partie = quoridor.Quoridor(partie_initial['joueurs'], None)
-
-    Le code en commentaire ci-dessus sert a tester Quoridor avec murs = None"""
+    """ J'ai mis ce code en paranthese pour tester autres choses
+    else:
+        partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
+    """
 
     #Afficher le damier selon la classe
     if mode_graph == True:
