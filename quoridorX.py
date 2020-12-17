@@ -72,14 +72,18 @@ class QuoridorX(quoridor.Quoridor):
 
             self.tony.pencolor("white")
             self.board.bgcolor("black")
-
+            self.counter = 0
             #Appelle la fonction afficher pour faire le tracage
             self.afficher()
 
     def afficher(self):
 
         #Enlève les dessins fait au préalable
+        #print("before clear")
         self.tony.clear()
+        #print("after clear")
+        print(self.counter)
+        self.counter += 1
 
         #Aller à la position de démarrage
         self.tony.penup()
@@ -173,3 +177,4 @@ class QuoridorX(quoridor.Quoridor):
             self.tony.penup()
 
         self.tony.goto(self.origin)
+
