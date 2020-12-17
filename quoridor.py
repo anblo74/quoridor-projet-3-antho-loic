@@ -56,6 +56,8 @@ class Quoridor:
                 forme de tuple (x, y) ou de liste [x, y].
                 """
 
+        if not hasattr(joueurs, '__iter__'):   #Si joueurs n'est pas itérable
+            raise QuoridorError("L'argument 'joueurs' n'est pas itérable.")
 
         #Exceptions à vérifier
         if len(joueurs) != 2:  #S'il n'y a pas 2 éléments dans la liste joueurs
@@ -103,9 +105,6 @@ class Quoridor:
             #La somme des nbr murs déjà placé et murs restant à jouer = 20
             raise QuoridorError("Le total des murs placés et plaçables n'est pas égal à 20.")
 
-        if not hasattr(joueurs, '__iter__'):   #Si joueurs n'est pas itérable
-            raise QuoridorError("L'argument 'joueurs' n'est pas itérable.")
-
         if type(joueurs[0]) is dict: #S'il y a un dictionnaire associé à joueur
             if not isinstance(joueurs[0]['pos'], (tuple, list)) \
             or not isinstance(joueurs[1]['pos'], (tuple, list)) \
@@ -113,6 +112,12 @@ class Quoridor:
             or len(joueurs[1]['pos']) != 2 :
                 #Si la valeur de 'pos' n'est pas un (tuple OU list) ou
                 # que la valeur de 'pos' n'a pas 2 valeurs
+                raise QuoridorError("La position d'un joueur est invalide.")
+            if (joueurs[0]['pos'][0] > 9) or (joueurs[0]['pos'][1] > 9) or \
+            (joueurs[1]['pos'][0] > 9) or (joueurs[1]['pos'][1] > 9):
+                raise QuoridorError("La position d'un joueur est invalide.")
+            if (joueurs[0]['pos'][0] < 1) or (joueurs[0]['pos'][1] < 1) or \
+            (joueurs[1]['pos'][0] < 1) or (joueurs[1]['pos'][1] < 1):
                 raise QuoridorError("La position d'un joueur est invalide.")
 
         self.joueurs = copy.deepcopy(joueurs)
