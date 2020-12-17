@@ -40,6 +40,8 @@ class QuoridorX(quoridor.Quoridor):
 
     def __init__(self, joueurs, murs):
         quoridor.Quoridor.__init__(self, joueurs, murs=None)
+
+        #Si le jeu est déjà démarré, mettre le damier à jour
         try:
             if self.board.tracer() == False:
                 self.afficher()
@@ -48,32 +50,38 @@ class QuoridorX(quoridor.Quoridor):
             self.board = turtle.Screen()
             self.board.title("Jeu de Quoridor")
 
+            #Set les dimensions pour la fenêtre (doit avoir ratio 1:1)
             width = 600
             height = 600
 
+            #Définis la région ou ce trouve le damier
             self.board_w = int(width * 0.60)
             self.board_h = int(height * 0.60)
 
+            #Par défaut l'origine est au centre, calculer la position en bas à gauche
             self.origin_x = -self.board_w/2
             self.origin_y = -self.board_h/2
             self.origin = (self.origin_x, self.origin_y)
 
+            #Set-up initial du jeu
             self.board.setup(width, height)
             self.tony = turtle.Turtle()
+            #Désactive les animation et cache la tortue
             self.board.tracer(False)
             self.tony.hideturtle()
 
             self.tony.pencolor("white")
             self.board.bgcolor("black")
 
-            print("Affichage durant init")
+            #Appelle la fonction afficher pour faire le tracage
             self.afficher()
 
     def afficher(self):
 
-        #Aller à la position de démarrage
+        #Enlève les dessins fait au préalable
         self.tony.clear()
-        
+
+        #Aller à la position de démarrage
         self.tony.penup()
         self.tony.goto(self.origin)
         self.tony.pendown()
