@@ -38,8 +38,8 @@ Ajouter une fenêtre en mode manuel graphique pour inscrire les positions
 
 class QuoridorX(quoridor.Quoridor):
 
-    def __init__(self, joueurs, murs):
-        quoridor.Quoridor.__init__(self, joueurs, murs=None)
+    def __init__(self, joueurs, murs=None):
+        quoridor.Quoridor.__init__(self, joueurs, murs)
 
         #Si le jeu est déjà démarré, mettre le damier à jour
         try:
