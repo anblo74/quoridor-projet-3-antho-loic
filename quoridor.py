@@ -177,8 +177,7 @@ class Quoridor:
                 damier[-2*y][4*x-1+k] = '-'
 
         #Murs verticaux
-        print("Murs")
-        print(self.murs)
+
         for pos in grille['murs']['verticaux']:
             x, y = pos
             for k in range(3):
@@ -461,11 +460,6 @@ class Quoridor:
             self.etat_partie['murs']["verticaux"].append(position)
 
             #On regénère le graphe
-            print(self.joueurs[0]['pos'])
-            print(self.joueurs[1]['pos'])
-            print(self.murs['horizontaux'])
-            print(self.murs['verticaux'])
-            
             self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], self.murs['horizontaux'], self.murs['verticaux'])
             
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
