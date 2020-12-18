@@ -79,11 +79,7 @@ class QuoridorX(quoridor.Quoridor):
     def afficher(self):
 
         #Enlève les dessins fait au préalable
-        #print("before clear")
         self.tony.clear()
-        #print("after clear")
-        print(self.counter)
-        self.counter += 1
 
         #Aller à la position de démarrage
         self.tony.penup()

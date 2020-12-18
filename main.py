@@ -112,10 +112,7 @@ if __name__ == "__main__":
     
     else:
         partie = quoridor.Quoridor(partie_initial['joueurs'], None)
-    """ J'ai mis ce code en paranthese pour tester autres choses
-    else:
-        partie = quoridor.Quoridor(partie_initial['joueurs'], partie_initial['murs'])
-    """
+
 
     #Afficher le damier selon la classe
     if mode_graph == True:
@@ -164,8 +161,7 @@ if __name__ == "__main__":
         else:
             partie.joueurs = etat_partie['joueurs']
             partie.murs = etat_partie['murs']
-            """partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
-            """
+
 
         #Afficher le damier selon la classe
         if mode_graph == True:
@@ -175,8 +171,8 @@ if __name__ == "__main__":
             
     if mode_graph == True:
                 partie.afficher()
-                print("Deuxième affichage après init")
+
     else:
         print(partie)
-    print("allo")
+
     print(partie.partie_terminée())
