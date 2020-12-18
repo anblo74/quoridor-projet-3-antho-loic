@@ -8,8 +8,10 @@ Définir une fonction qui accepte les arguments de la ligne de commande:
 python main.py --help pour avoir de l'aide.
 python main.py idul pour jouer en mode manuel contre le serveur avec le nom idul.
 python main.py -a idul pour jouer en mode automatique contre le serveur avec le nom idul.
-python main.py -x idul pour jouer en mode manuel contre le serveur avec le nom idul, mais avec un affichage dans une fenêtre graphique.
-python main.py -ax idul pour jouer en mode automatique contre le serveur avec le nom idul, mais avec un affichage dans une fenêtre graphique
+python main.py -x idul pour jouer en mode manuel contre le serveur avec le nom idul,
+mais avec un affichage dans une fenêtre graphique.
+python main.py -ax idul pour jouer en mode automatique contre le serveur avec le nom idul,
+mais avec un affichage dans une fenêtre graphique
 _____________________________________________________
 La fonctionnalité --help affiche la réponse suivante:
 usage: main.py [-h] [-a] [-x] idul
