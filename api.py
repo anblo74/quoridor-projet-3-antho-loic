@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
 
-"""
-Réutiliser les API écrit lors du projet 1
-"""
-
 URL = "https://python.gel.ulaval.ca/quoridor/api/"
 
 
@@ -45,8 +41,7 @@ def jouer_coup(id_partie, type_coup, position):
         if winner is not None:
             raise StopIteration(f'{winner}')
         #retourne un tupple avec id et etat de la partie
-        else:
-            return (rep['id'], rep['état'])
+        return (rep['id'], rep['état'])
 
     if rep.status_code == 406:
         rep = rep.json()

@@ -1,6 +1,6 @@
+import argparse
 import quoridor
 import quoridorx
-import argparse
 from api import initialiser_partie, jouer_coup
 
 """
@@ -28,11 +28,15 @@ ___________________________________________________
 Voir code partie 1 pour référence
 
 ========================================================
-Le module main.py permet de faire rouler le jeu. Il doit respecter le fonctionnement voulu par le professeur:
-Dans le mode manuel (par défaut), votre boucle de jeu doit demander au joueur humain d'entrer son coup,
+Le module main.py permet de faire rouler le jeu. Il doit respecter le fonctionnement
+voulu par le professeur:
+Dans le mode manuel (par défaut), votre boucle de jeu doit demander au joueur
+humain d'entrer son coup,
 puis le transmettre au serveur afin qu'à son tour celui-ci puisse jouer son coup.
-Dans le mode automatique, votre programme doit jouer automatiquement contre le serveur sans aucune intervention humaine.
-Dans le mode graphique, votre programme doit ouvrir une fenêtre afin de dessiner une représentation graphique de l'état du damier,
+Dans le mode automatique, votre programme doit jouer automatiquement contre le
+serveur sans aucune intervention humaine.
+Dans le mode graphique, votre programme doit ouvrir une fenêtre afin de dessiner
+une représentation graphique de l'état du damier,
 contrairement aux modes précédents qui affichent ce dernier en art ascii.
 Vous avez carte blanche quant à l'apparence de votre représentation graphique.
 ------------------------------------------------------------------------------
@@ -50,7 +54,7 @@ Par défaut, lorsqu'il n'y a pas d'argument optionnel dans la CLI on start le mo
         Initialiser la réponse du serveur comme un objet de classe Quoridor
         Afficher à l'écran en ASCII l'état de la partie
         Si la partie est terminée, afficher le nom du gagnant
-        
+
 Lorsque l'argument -a est utilisé dans la CLI, on start le mode automatique.
     Mode automatique: (semblable partie 2)
         Envoyer un POST pour initialiser la partie
@@ -81,8 +85,10 @@ def analyser_commande():
     # créer un analyseur de ligne de commande
     parser = argparse.ArgumentParser(description= "Jeu Quoridor - phase 3")
     parser.add_argument('idul', help = 'IDUL du joueur')
-    parser.add_argument('-a', '--automatique', action = 'store_true', help = 'Activer le mode automatique.')
-    parser.add_argument('-x', '--graphique', action = 'store_true', help = 'Activer le mode graphique.')
+    parser.add_argument('-a', '--automatique', action = 'store_true',\
+    help = 'Activer le mode automatique.')
+    parser.add_argument('-x', '--graphique', action = 'store_true',\
+    help = 'Activer le mode graphique.')
     return parser.parse_args()
 
 
@@ -105,7 +111,7 @@ if __name__ == "__main__":
 
     ##Crée l'objet de jeu avec la classe demandée
     #Si le mode graphique est actif, utiliser la classe quoridorx
-    if mode_graph == True:
+    if mode_graph:
         partie = quoridorx.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
 
     #Si le mode graphique est inactif, utiliser la classe Quoridor
@@ -115,7 +121,7 @@ if __name__ == "__main__":
 
 
     #Afficher le damier selon la classe
-    if mode_graph == True:
+    if mode_graph:
         partie.afficher()
     else:
         print(partie)
@@ -124,7 +130,7 @@ if __name__ == "__main__":
     while not partie.partie_terminée():
         ##Le joueur 1 choisi son coup selon le mode spécifié
         #Si le mode automatique est activé, choisir automatique le coup
-        if mode_auto == True:
+        if mode_auto:
             (type_coup, position) = partie.jouer_coup(1)
 
         #Si le mode manuel est activé, l'utilisateur choisi le coup à jouer
@@ -143,7 +149,7 @@ if __name__ == "__main__":
             input('Définissez la position en Y de votre coup :'))
 
         #Selon le critère 3.6 : Afficher le damier à chaque coup
-        if mode_graph == True:
+        if mode_graph:
             partie.afficher()
         else:
             print(partie)
@@ -153,7 +159,7 @@ if __name__ == "__main__":
 
         ##Update l'objet de jeu avec l'état actuel et la classe demandée
         #Si le mode graphique est actif, utiliser la classe quoridorx
-        if mode_graph == True:
+        if mode_graph:
             partie.joueurs = etat_partie['joueurs']
             partie.murs = etat_partie['murs']
 
@@ -164,13 +170,13 @@ if __name__ == "__main__":
 
 
         #Afficher le damier selon la classe
-        if mode_graph == True:
+        if mode_graph:
             partie.afficher()
         else:
             print(partie)
 
-    if mode_graph == True:
-                partie.afficher()
+    if mode_graph:
+        partie.afficher()
 
     else:
         print(partie)

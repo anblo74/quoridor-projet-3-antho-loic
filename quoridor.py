@@ -5,7 +5,7 @@ import networkx as nx
 
 """
 À ajouter à la classe:
-- Stratégie de jeu 
+- Stratégie de jeu
 --------------------------
 La stratégie de jeu sera utilisée lors du mode automatique.
 La stratégie doit vaincre le serveur / joueur 2 à chaque coup
@@ -72,7 +72,7 @@ class Quoridor:
         if murs is not None and type(murs) is not dict:
             #Si murs est présent et qu'il n'est pas de type dict
             raise QuoridorError("L'argument 'murs' n'est pas un dictionnaire lorsque présent.")
-        
+
         if type(murs) == dict:  #Si murs contient un dictionnaire
             for i in range (len(murs['horizontaux'])):
                 #Pour les murs horizontaux, itérer sur chaque position de mur placé
@@ -92,13 +92,13 @@ class Quoridor:
 
         if murs is None:
             murs = {'horizontaux': [], 'verticaux': []}
-        
+
         if type(joueurs[0]) == str:  #Si la partie vient de start
             joueurs[0] = {"nom": joueurs[0], "murs": 10, "pos": (5, 1)}
             #Ajouter position initiale joueur 1
             joueurs[1] = {"nom": joueurs[1], "murs": 10, "pos": (5, 9)}
             #Ajouter position initiale joueur 2
-        
+
         if len(murs['horizontaux']) + len(murs['verticaux']) + \
         joueurs[0]["murs"] + joueurs[1]["murs"] != 20:
             #La somme des nbr murs déjà placé et murs restant à jouer = 20
@@ -208,7 +208,7 @@ class Quoridor:
         self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
         self.murs['horizontaux'], self.murs['verticaux'])
 
-        if joueur != 1 and joueur != 2:
+        if joueur not in (1, 2):
             raise QuoridorError('Le numéro du joueur est autre que 1 ou 2.')
 
         if position[0] > 9 or position[1] > 9 or position[0] < 1 or position[1] < 1:
@@ -286,9 +286,9 @@ class Quoridor:
 
         (x,y) == position où on pose le mur ou le jeton"""
 
-        if joueur != 1 and joueur != 2:
+        if joueur not in (1, 2):
             raise QuoridorError('Le numéro du joueur est autre que 1 ou 2.')
-        if self.partie_terminée() != False:
+        if self.partie_terminée():
             raise QuoridorError("La partie est déjà terminée.")
 
         #Générer un graphe
@@ -308,27 +308,27 @@ class Quoridor:
             next_move = short_path_j1[1]
             self.déplacer_jeton(joueur, next_move)
             return("D", next_move)
+
+        #Déterminer s'il faut un mur vertical ou horizontal
+        if (short_path_j2[0][0] - short_path_j2[1][0]) == 0:
+            #Si le déplacement est dans l'axe des y, mettre un mur horizontal
+            next_move = short_path_j2[1]
+
+            try:
+                self.placer_mur(joueur, next_move, "horizontal")
+                return("MH", next_move)
+            except QuoridorError:
+                self.déplacer_jeton(joueur, short_path_j1[1])
+                return ("D", short_path_j1[1])
         else:
-            #Déterminer s'il faut un mur vertical ou horizontal
-            if (short_path_j2[0][0] - short_path_j2[1][0]) == 0:
-                #Si le déplacement est dans l'axe des y, mettre un mur horizontal
-                next_move = short_path_j2[1]
+            next_move = short_path_j2[1]
 
-                try:
-                    self.placer_mur(joueur, next_move, "horizontal")
-                    return("MH", next_move)
-                except QuoridorError:
-                    self.déplacer_jeton(joueur, short_path_j1[1])
-                    return ("D", short_path_j1[1])
-            else:
-                next_move = short_path_j2[1]
-
-                try:
-                    self.placer_mur(joueur, next_move, "vertical")
-                    return("MV", next_move)
-                except QuoridorError:
-                    self.déplacer_jeton(joueur, short_path_j1[1])
-                    return ("D", short_path_j1[1])
+            try:
+                self.placer_mur(joueur, next_move, "vertical")
+                return("MV", next_move)
+            except QuoridorError:
+                self.déplacer_jeton(joueur, short_path_j1[1])
+                return ("D", short_path_j1[1])
 
 
     def partie_terminée(self):
@@ -341,8 +341,7 @@ class Quoridor:
             return self.joueurs[0]['nom']
         if self.joueurs[1]['pos'][1] == 1:
             return self.joueurs[1]['nom']
-        else:
-            return False
+        return False
 
     def placer_mur(self, joueur, position, orientation):
         """Placer un mur.
@@ -363,7 +362,7 @@ class Quoridor:
         self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
         self.murs['horizontaux'], self.murs['verticaux'])
 
-        if joueur != 1 and joueur != 2:
+        if joueur not in (1, 2):
             raise QuoridorError('Le numéro du joueur est autre que 1 ou 2.')
         if self.joueurs[joueur - 1]['murs'] == 0:
             raise QuoridorError('Le joueur a déjà placé tous ses murs.')
@@ -404,7 +403,7 @@ class Quoridor:
             #On regénère le graphe
             self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], \
             self.murs['horizontaux'], self.murs['verticaux'])
-            
+
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.joueurs[0]['pos']), 'B1') \
             and nx.has_path(self.graphe, tuple(self.joueurs[1]['pos']), 'B2')):
@@ -443,7 +442,7 @@ class Quoridor:
             #On regénère le graphe
             self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']],\
             self.murs['horizontaux'], self.murs['verticaux'])
-            
+
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.joueurs[0]['pos']), 'B1') \
             and nx.has_path(self.graphe, tuple(self.joueurs[1]['pos']), 'B2')):

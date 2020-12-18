@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import turtle
-import quoridor
 import time
+import quoridor
 
 """
 Le module quoridorx.py contient:
@@ -14,7 +14,8 @@ La classe QuoridorX est définie par héritage de la classe Quoridor du module q
 
 La méthode d'affichage graphique d'un damier est définie par la méthode __str___
 Elle remplace alors le print() en art ASCII de la classe mère Quoridor
-Elle affiche à l'aide de la librairie turtle une représentation graphique du damier dans une fenêtre externe
+Elle affiche à l'aide de la librairie turtle une représentation graphique
+du damier dans une fenêtre externe
 Explication de l'implantation:
     Importer la librairie turtle
     Faire le setup avec une résolution de 800 x 800
@@ -27,14 +28,13 @@ Explication de l'implantation:
         Ajouter la position des joueurs
         Ajouter la position des murs verticaux
         Ajouter la position des murs horizontaux
-        
+
 À changer:
 Mettre la génération du damier de base dans le constructeur de QuoridorX
 Garder la même fenêtre ouverte lors de l'exécution
 Marquer les positions avec un carré de couleur et l'indiquer dans la légende
 Se rappeler des derniers carrés et les effacer lors de l'update de la position
 Ajouter une fenêtre en mode manuel graphique pour inscrire les positions
-
 """
 
 class QuoridorX(quoridor.Quoridor):
@@ -174,4 +174,4 @@ class QuoridorX(quoridor.Quoridor):
 
         self.tony.goto(self.origin)
 
-        #time.sleep(0.3)
+        time.sleep(0.3)
