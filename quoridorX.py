@@ -6,7 +6,7 @@ import quoridor
 import time
 
 """
-Le module quoridorX.py contient:
+Le module quoridorx.py contient:
 - Classe QuoridorX
 - Méthode d'affichage graphique d'un damier avec Turtle
 --------------------------------------------------------

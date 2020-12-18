@@ -1,5 +1,5 @@
 import quoridor
-import quoridorX
+import quoridorx
 import argparse
 from api import initialiser_partie, jouer_coup
 
@@ -66,12 +66,12 @@ Lorsque l'argument -a est utilisé dans la CLI, on start le mode automatique.
 Lorsque l'argument -x est utilisé dans la CLI, on active le mode graphique
     Mode graphique: (s'ajoute aux modes du jeu)
         Initialiser la partie en envoyant un POST au serveur.
-        Initialiser un objet de classe QuoridorX avec un deep copy
+        Initialiser un objet de classe quoridorx avec un deep copy
         Afficher le damier sous forme graphique dans une fenêtre externe
         Tant que la partie n'est pas finie:
             Choisir le coup selon le mode actif
             Transmettre via un PUT au serveur le move du joueur
-            Initialiser la réponse du serveur comme un objet de classe QuoridorX
+            Initialiser la réponse du serveur comme un objet de classe quoridorx
             Afficher le damier sous forme graphique dans une fenêtre externe
             Si la partie est terminée, afficher le nom du gagnant
 
@@ -104,9 +104,9 @@ if __name__ == "__main__":
     ID, partie_initial = initialiser_partie(idul)
 
     ##Crée l'objet de jeu avec la classe demandée
-    #Si le mode graphique est actif, utiliser la classe QuoridorX
+    #Si le mode graphique est actif, utiliser la classe quoridorx
     if mode_graph == True:
-        partie = quoridorX.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
+        partie = quoridorx.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
 
     #Si le mode graphique est inactif, utiliser la classe Quoridor
 
@@ -152,7 +152,7 @@ if __name__ == "__main__":
         ID, etat_partie = jouer_coup(ID, type_coup, position)
 
         ##Update l'objet de jeu avec l'état actuel et la classe demandée
-        #Si le mode graphique est actif, utiliser la classe QuoridorX
+        #Si le mode graphique est actif, utiliser la classe quoridorx
         if mode_graph == True:
             partie.joueurs = etat_partie['joueurs']
             partie.murs = etat_partie['murs']
