@@ -129,6 +129,20 @@ class QuoridorX(quoridor.Quoridor):
 
         self.tony.goto(self.origin)
 
+        #Ajout de la légende
+        self.tony.penup()
+        self.tony.setheading(90)
+        self.tony.forward(self.board_h + self.board_h//20 * 5)
+        self.tony.write("Légende:")
+        self.tony.backward(self.board_h //20)
+        self.tony.write("1=" + str(self.joueurs[0]['nom']))
+        self.tony.backward(self.board_h //20)
+        self.tony.write('murs=' + str(self.joueurs[0]['murs'] * '| '))
+        self.tony.backward(self.board_h //20)
+        self.tony.write("2=" + str(self.joueurs[1]['nom']))
+        self.tony.backward(self.board_h //20)
+        self.tony.write('murs=' + str(self.joueurs[1]['murs'] * '| '))
+        
         #Ajout de la position des murs verticaux
         position_murs_verticaux = self.murs['verticaux']
         self.tony.pensize(10)
