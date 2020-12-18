@@ -117,7 +117,7 @@ class QuoridorX(quoridor.Quoridor):
         for i in range(1, 10):
             self.tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
             self.tony.forward(self.board_h // 10)
-            
+
         #Ajouter la numérotation des rangs horizontaux
         self.tony.goto(self.origin)
         self.tony.forward(self.board_h // 40)
@@ -126,7 +126,7 @@ class QuoridorX(quoridor.Quoridor):
         for i in range(1, 10):
             self.tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
             self.tony.forward(self.board_w // 10)
-        
+
         self.tony.goto(self.origin)
 
         #Ajout de la position des murs verticaux

@@ -109,7 +109,7 @@ if __name__ == "__main__":
         partie = quoridorX.QuoridorX(partie_initial['joueurs'], partie_initial['murs'])
 
     #Si le mode graphique est inactif, utiliser la classe Quoridor
-    
+
     else:
         partie = quoridor.Quoridor(partie_initial['joueurs'], None)
 
@@ -168,7 +168,7 @@ if __name__ == "__main__":
             partie.afficher()
         else:
             print(partie)
-            
+
     if mode_graph == True:
                 partie.afficher()
 

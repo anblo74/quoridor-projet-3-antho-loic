@@ -220,7 +220,7 @@ class Quoridor:
                 return
             if type(i) == str:
                 #Le dernier item de la liste est un str, alors
-                # rendu là on sait qu'on a fini d'itérer
+                #rendu là on sait qu'on a fini d'itérer
                 raise QuoridorError("La position est invalide pour l'état actuel du jeu.")
 
 
@@ -441,7 +441,8 @@ class Quoridor:
             self.murs["verticaux"].append(position)
 
             #On regénère le graphe
-            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']], self.murs['horizontaux'], self.murs['verticaux'])
+            self.graphe = construire_graphe([self.joueurs[0]['pos'], self.joueurs[1]['pos']],\
+            self.murs['horizontaux'], self.murs['verticaux'])
             
             #On vérifie s'il y a toujours un chemin possible pour les joueurs
             if not (nx.has_path(self.graphe, tuple(self.joueurs[0]['pos']), 'B1') \
