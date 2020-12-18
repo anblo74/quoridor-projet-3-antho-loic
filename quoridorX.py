@@ -137,7 +137,7 @@ class QuoridorX(quoridor.Quoridor):
         self.tony.goto(self.origin)
 
         #Inscrire la position des joueurs sur le damier
-        position_joueur = (self.etat_partie['joueurs'][0]['pos'], self.etat_partie['joueurs'][1]['pos'])
+        position_joueur = (self.joueurs[0]['pos'], self.joueurs[1]['pos'])
         for i in range(0, 2):
             self.tony.goto(self.origin_x + self.board_w //20, self.origin_y + self.board_h //40)
             self.tony.forward(position_joueur[i][0] * self.board_w // 10)
@@ -147,7 +147,7 @@ class QuoridorX(quoridor.Quoridor):
             self.tony.setheading(0)
 
         #Ajout de la position des murs verticaux
-        position_murs_verticaux = self.etat_partie['murs']['verticaux']
+        position_murs_verticaux = self.murs['verticaux']
 
         self.tony.pensize(10)
 
@@ -162,7 +162,7 @@ class QuoridorX(quoridor.Quoridor):
             self.tony.penup()
 
         #Ajout position murs horizontaux
-        position_murs_horizontaux = self.etat_partie['murs']['horizontaux']
+        position_murs_horizontaux = self.murs['horizontaux']
 
         self.tony.setheading(0)
 

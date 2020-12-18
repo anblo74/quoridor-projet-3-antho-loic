@@ -157,12 +157,15 @@ if __name__ == "__main__":
         ##Update l'objet de jeu avec l'état actuel et la classe demandée
         #Si le mode graphique est actif, utiliser la classe QuoridorX
         if mode_graph == True:
-            partie = quoridorX.QuoridorX(etat_partie['joueurs'], etat_partie['murs'])
+            partie.joueurs = etat_partie['joueurs']
+            partie.murs = etat_partie['murs']
 
         #Si le mode graphique est inactif, utiliser la classe Quoridor
         else:
-
-            partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
+            partie.joueurs = etat_partie['joueurs']
+            partie.murs = etat_partie['murs']
+            """partie = quoridor.Quoridor(etat_partie['joueurs'], etat_partie['murs'])
+            """
 
         #Afficher le damier selon la classe
         if mode_graph == True:
