@@ -3,6 +3,7 @@
 
 import turtle
 import quoridor
+import time
 
 """
 Le module quoridorX.py contient:
@@ -41,40 +42,37 @@ class QuoridorX(quoridor.Quoridor):
     def __init__(self, joueurs, murs=None):
         quoridor.Quoridor.__init__(self, joueurs, murs)
 
-        #Si le jeu est déjà démarré, mettre le damier à jour
-        try:
-            if self.board.tracer() == False:
-                self.afficher()
-        except:
-            #Initialiser une fenêtre
-            self.board = turtle.Screen()
-            self.board.title("Jeu de Quoridor")
 
-            #Set les dimensions pour la fenêtre (doit avoir ratio 1:1)
-            width = 600
-            height = 600
+        #Initialiser une fenêtre
+        self.board = turtle.Screen()
+        self.board.title("Jeu de Quoridor")
 
-            #Définis la région ou ce trouve le damier
-            self.board_w = int(width * 0.60)
-            self.board_h = int(height * 0.60)
+        #Set les dimensions pour la fenêtre (doit avoir ratio 1:1)
+        width = 600
+        height = 600
 
-            #Par défaut l'origine est au centre, calculer la position en bas à gauche
-            self.origin_x = -self.board_w/2
-            self.origin_y = -self.board_h/2
-            self.origin = (self.origin_x, self.origin_y)
+        #Définis la région ou ce trouve le damier
+        self.board_w = int(width * 0.60)
+        self.board_h = int(height * 0.60)
 
-            #Set-up initial du jeu
-            self.board.setup(width, height)
-            self.tony = turtle.Turtle()
-            #Désactive les animation et cache la tortue
-            self.board.tracer(False)
-            self.tony.hideturtle()
+        #Par défaut l'origine est au centre, calculer la position en bas à gauche
+        self.origin_x = -self.board_w/2
+        self.origin_y = -self.board_h/2
+        self.origin = (self.origin_x, self.origin_y)
 
-            self.tony.pencolor("white")
-            self.board.bgcolor("black")
-            self.counter = 0
-            #Appelle la fonction afficher pour faire le tracage
-            self.afficher()
+        #Set-up initial du jeu
+        self.board.setup(width, height)
+        self.tony = turtle.Turtle()
+        #Désactive les animation et cache la tortue
+        self.board.tracer(False)
+        self.tony.hideturtle()
+        #self.tony.speed(10)
+
+        self.tony.pencolor("white")
+        self.board.bgcolor("black")
+
+        #Appelle la fonction afficher pour faire le tracage
+        self.afficher()
 
     def afficher(self):
 
@@ -85,7 +83,6 @@ class QuoridorX(quoridor.Quoridor):
         self.tony.penup()
         self.tony.goto(self.origin)
         self.tony.pendown()
-        self.tony.pensize(1)
 
         #Faire une grille de 10 x 10
         #Tracer les lignes verticales
@@ -121,7 +118,7 @@ class QuoridorX(quoridor.Quoridor):
             self.tony.write(str(i), align='center', font=('Arial', '15', 'normal'))
             self.tony.forward(self.board_h // 10)
             
-        #Ajouter la numérotation des rangs verticaux
+        #Ajouter la numérotation des rangs horizontaux
         self.tony.goto(self.origin)
         self.tony.forward(self.board_h // 40)
         self.tony.setheading(0)
@@ -132,19 +129,8 @@ class QuoridorX(quoridor.Quoridor):
         
         self.tony.goto(self.origin)
 
-        #Inscrire la position des joueurs sur le damier
-        position_joueur = (self.joueurs[0]['pos'], self.joueurs[1]['pos'])
-        for i in range(0, 2):
-            self.tony.goto(self.origin_x + self.board_w //20, self.origin_y + self.board_h //40)
-            self.tony.forward(position_joueur[i][0] * self.board_w // 10)
-            self.tony.setheading(90)
-            self.tony.forward(position_joueur[i][1] * self.board_h //10)
-            self.tony.write(str(i+1), align='center', font=('Arial', '15', 'normal'))
-            self.tony.setheading(0)
-
         #Ajout de la position des murs verticaux
         position_murs_verticaux = self.murs['verticaux']
-
         self.tony.pensize(10)
 
         for i in range(len(position_murs_verticaux)):
@@ -172,5 +158,20 @@ class QuoridorX(quoridor.Quoridor):
             self.tony.forward(2 * self.board_w // 10)
             self.tony.penup()
 
+
+        #Inscrire la position des joueurs sur le damier
+        position_joueur = (self.joueurs[0]['pos'], self.joueurs[1]['pos'])
+        self.tony.pensize(1)
+
+        for i in range(0, 2):
+            self.tony.goto(self.origin_x + self.board_w //20, self.origin_y + self.board_h //40)
+            self.tony.forward(position_joueur[i][0] * self.board_w // 10)
+            self.tony.setheading(90)
+            self.tony.forward(position_joueur[i][1] * self.board_h //10)
+            self.tony.write(str(i+1), align='center', font=('Arial', '15', 'normal'))
+            self.tony.setheading(0)
+
+
         self.tony.goto(self.origin)
 
+        #time.sleep(0.3)

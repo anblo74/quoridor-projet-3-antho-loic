@@ -19,7 +19,6 @@ Sinon on va poser un mur pour ralentir le joueur 2:
     Déterminer si le déplacement le plus rapide de l'adversaire est horizontal ou vertical
     Poser un mur sur le sens approprié pour bloquer l'adversaire
 
-TODO
 """
 
 class QuoridorError(Exception):
