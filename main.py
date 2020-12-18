@@ -1,5 +1,5 @@
 import quoridor
-import quoridorX
+import quoridorx
 import argparse
 from api import initialiser_partie, jouer_coup
 
