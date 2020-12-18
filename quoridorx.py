@@ -142,7 +142,7 @@ class QuoridorX(quoridor.Quoridor):
         self.tony.write("2=" + str(self.joueurs[1]['nom']))
         self.tony.backward(self.board_h //20)
         self.tony.write('murs=' + str(self.joueurs[1]['murs'] * '| '))
-        
+
         #Ajout de la position des murs verticaux
         position_murs_verticaux = self.murs['verticaux']
         self.tony.pensize(10)
